@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skills — Joe Tustin</title>
+<meta name="description" content="Small, sharp tools you can hand to Claude. Point Claude at this page, name the skill, and it installs itself.">
+<meta name="theme-color" content="#F2EDE4">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /*  Palette matches joetustin.com (warm paper #F2EDE4). Single accent kept in a
+      variable (--accent) so it's trivial to recolor to the live site's accent.  */
+  :root{
+    --paper:#F2EDE4; --paper-2:#ece5d7; --card:#f8f4ec;
+    --ink:#211d17; --ink-soft:#4a443b; --muted:#8a8073; --faint:#a8a092;
+    --accent:#9a3f28;            /* deep clay — swap to your site accent */
+    --accent-soft:#b56a4e;
+    --line:rgba(33,29,23,.13); --line-soft:rgba(33,29,23,.08);
+    --serif:'Fraunces',Georgia,'Times New Roman',serif;
+    --sans:'Inter',system-ui,-apple-system,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--paper);color:var(--ink);font-family:var(--sans);
+    font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--accent);color:var(--paper)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 26px}
+
+  /* top bar — minimal, matches a personal-site header */
+  header{border-bottom:1px solid var(--line-soft)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .home{font-family:var(--serif);font-weight:600;font-size:18px;letter-spacing:-.01em}
+  .home a:hover{color:var(--accent)}
+  .crumbs{font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;color:var(--muted)}
+  .crumbs a:hover{color:var(--ink)}
+  .crumbs .sep{color:var(--faint);margin:0 8px}
+  .crumbs .here{color:var(--ink)}
+
+  /* hero */
+  .hero{padding:74px 0 50px}
+  .kicker{font-family:var(--mono);font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:22px}
+  h1{font-family:var(--serif);font-weight:800;font-size:clamp(40px,6.4vw,64px);line-height:1.04;
+    letter-spacing:-.02em;max-width:15ch}
+  .lede{margin-top:20px;font-size:clamp(17px,2.1vw,20px);color:var(--ink-soft);max-width:56ch}
+  .lede b{color:var(--ink);font-weight:600}
+
+  /* the instruction — signature element, styled as a quiet command line */
+  .say{margin-top:38px;max-width:740px;border:1px solid var(--line);border-radius:12px;
+    background:var(--card);overflow:hidden}
+  .say-top{display:flex;align-items:center;justify-content:space-between;gap:12px;
+    padding:11px 16px;border-bottom:1px solid var(--line-soft);background:var(--paper-2)}
+  .say-top .label{font-family:var(--mono);font-size:11px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--muted)}
+  .say-body{display:flex;align-items:flex-start;gap:16px;padding:20px}
+  .say-body .text{flex:1;font-family:var(--mono);font-size:14.5px;line-height:1.7;color:var(--ink)}
+  .say-foot{padding:0 20px 16px;font-family:var(--mono);font-size:12px;color:var(--faint)}
+
+  .copy{flex-shrink:0;font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;
+    text-transform:uppercase;color:var(--ink);background:transparent;border:1px solid var(--line);
+    border-radius:7px;padding:8px 13px;cursor:pointer;transition:.15s;white-space:nowrap}
+  .copy:hover{border-color:var(--accent);color:var(--accent)}
+  .copy.done{border-color:var(--accent);color:var(--accent)}
+
+  /* sections */
+  .sec{padding:58px 0;border-top:1px solid var(--line-soft)}
+  .sec-kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--faint);margin-bottom:10px}
+  .sec-title{font-family:var(--serif);font-weight:600;font-size:clamp(25px,3.4vw,33px);
+    letter-spacing:-.01em}
+
+  /* skill entry */
+  .skill{margin-top:30px;border:1px solid var(--line);border-radius:16px;background:var(--card);
+    overflow:hidden}
+  .skill-head{padding:28px 30px 24px;border-bottom:1px solid var(--line-soft)}
+  .meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+  .pill{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--accent);border:1px solid var(--line);border-radius:999px;padding:4px 11px}
+  .pill.muted{color:var(--muted)}
+  .skill h3{font-family:var(--serif);font-weight:600;font-size:clamp(23px,2.9vw,29px);
+    letter-spacing:-.01em;margin-bottom:10px}
+  .skill .tagline{color:var(--ink-soft);font-size:16.5px;max-width:64ch}
+
+  .does{padding:22px 30px;display:grid;grid-template-columns:1fr 1fr;gap:13px 30px}
+  .does .row{display:flex;gap:11px;font-size:14.5px}
+  .does .row .b{flex-shrink:0;color:var(--accent);font-weight:700;line-height:1.6}
+  .does .row .t{color:var(--ink-soft)}
+  .does .row .t b{color:var(--ink);font-weight:600}
+
+  .load{border-top:1px solid var(--line-soft);padding:24px 30px 28px}
+  .load-label{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--faint);margin-bottom:15px}
+  .tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+  .tab{font-family:var(--mono);font-size:12.5px;color:var(--muted);background:var(--paper-2);
+    border:1px solid var(--line-soft);border-radius:8px;padding:8px 14px;cursor:pointer;transition:.15s}
+  .tab:hover{color:var(--ink)}
+  .tab[aria-selected="true"]{color:var(--paper);background:var(--accent);border-color:var(--accent)}
+  .panel{display:none}.panel.active{display:block}
+  .panel p{font-size:14.5px;color:var(--ink-soft);margin-bottom:13px}
+  .panel p b{color:var(--ink);font-weight:600}
+
+  .code{display:flex;align-items:flex-start;gap:13px;background:#23201a;border-radius:10px;
+    padding:15px 16px}
+  .code code{flex:1;font-family:var(--mono);font-size:12.5px;line-height:1.75;color:#e7e0d2;
+    white-space:pre-wrap;word-break:break-word}
+  .code .ac{color:#e0a285}
+  .code .copy{color:#e7e0d2;border-color:rgba(231,224,210,.22)}
+  .code .copy:hover{color:#fff;border-color:#e0a285}
+
+  .dl{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:12.5px;
+    color:var(--paper);background:var(--accent);border:1px solid var(--accent);border-radius:9px;
+    padding:11px 17px;transition:.15s}
+  .dl:hover{background:var(--accent-soft);border-color:var(--accent-soft)}
+  .dl.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+  .dl.ghost:hover{border-color:var(--accent);color:var(--accent)}
+  .dl-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+
+  .src{margin-top:18px;font-family:var(--mono);font-size:12px;color:var(--faint)}
+  .src a{color:var(--accent-soft);border-bottom:1px solid transparent}
+  .src a:hover{border-color:var(--accent-soft)}
+
+  /* how it works */
+  .steps{margin-top:28px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+    background:var(--line-soft);border:1px solid var(--line-soft);border-radius:14px;overflow:hidden}
+  .step{background:var(--card);padding:24px 22px}
+  .step .n{font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--accent);margin-bottom:12px}
+  .step h4{font-family:var(--serif);font-weight:600;font-size:18px;margin-bottom:7px}
+  .step p{font-size:14px;color:var(--ink-soft)}
+  .note{margin-top:22px;font-size:13.5px;color:var(--muted);font-family:var(--mono);line-height:1.7;
+    border-left:2px solid var(--line);padding-left:16px}
+  .note b{color:var(--ink-soft)}
+
+  footer{border-top:1px solid var(--line-soft);padding:38px 0 60px;margin-top:18px}
+  .foot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+  .foot .l{font-family:var(--serif);font-size:16px}
+  .foot .r{display:flex;gap:20px;font-family:var(--mono);font-size:12.5px;color:var(--muted)}
+  .foot .r a:hover{color:var(--accent)}
+  .disclaim{margin-top:18px;font-size:12.5px;color:var(--faint);max-width:72ch;line-height:1.6}
+
+  @media(max-width:680px){
+    .does{grid-template-columns:1fr}
+    .steps{grid-template-columns:1fr}
+    .say-body{flex-direction:column}
+    .copy{align-self:flex-start}
+    .crumbs .hide-sm{display:none}
+  }
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="home"><a href="https://joetustin.com">Joe&nbsp;Tustin</a></div>
+    <div class="crumbs"><a href="https://joetustin.com">home</a><span class="sep">/</span><span class="here">skills</span></div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="kicker">Skills</div>
+    <h1>Small, sharp tools you hand to Claude.</h1>
+    <p class="lede">Each one teaches Claude to do a specific job well. <b>Point Claude at this page, name the skill, and it installs itself</b> — in Claude Code, Cowork, or Claude.ai. Local-first. Yours to read before you run it.</p>
+
+    <div class="say">
+      <div class="say-top">
+        <span class="label">say this to claude</span>
+      </div>
+      <div class="say-body">
+        <div class="text" id="heroSay">Go to joetustin.com/skills, find the United / Chase bonus-dispute skill, and install it.</div>
+        <button class="copy" data-copy="#heroSay">Copy</button>
+      </div>
+      <div class="say-foot">Claude reads the catalog, grabs the right skill, and drops it into your skills folder.</div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="skills">
+  <div class="wrap">
+    <div class="sec-kicker">Available now</div>
+    <div class="sec-title">The skills</div>
+
+    <article class="skill">
+      <div class="skill-head">
+        <div class="meta">
+          <span class="pill">Personal finance</span>
+          <span class="pill muted">Travel &middot; Miles &amp; points</span>
+        </div>
+        <h3>Co-branded Card Bonus Dispute</h3>
+        <p class="tagline">You opened the card for the welcome bonus, hit the spend, and the miles, points, or status-qualifying points (United&nbsp;PQP, Delta&nbsp;MQD&hellip;) never fully posted. This runs the whole recovery, end to end.</p>
+      </div>
+
+      <div class="does">
+        <div class="row"><span class="b">&#8594;</span><span class="t"><b>Reconciles</b> your card statements against the loyalty activity export to find exactly which piece is missing.</span></div>
+        <div class="row"><span class="b">&#8594;</span><span class="t"><b>Diagnoses</b> the failure — duplicate account, status-points half dropped, partial post, wrong-account routing.</span></div>
+        <div class="row"><span class="b">&#8594;</span><span class="t"><b>Corroborates the offer</b> you signed up for, including a Wayback snapshot of the issuer's own page.</span></div>
+        <div class="row"><span class="b">&#8594;</span><span class="t"><b>Generates the packet</b> — timeline PDF, status doc, ready-to-send messages for both sides, phone scripts, tracker.</span></div>
+      </div>
+
+      <div class="load">
+        <div class="load-label">Load it</div>
+        <div class="tabs" role="tablist">
+          <button class="tab" role="tab" aria-selected="true" data-tab="t-tell">Tell Claude</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="t-code">Claude Code</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="t-ai">Claude.ai / Cowork</button>
+        </div>
+
+        <div class="panel active" id="t-tell">
+          <p>In Claude Code or Cowork, paste this. Claude fetches the catalog, finds this skill, and installs it:</p>
+          <div class="code">
+            <code id="cmdTell">Go to https://joetustin.com/skills/index.json, find the cobranded-card-bonus-dispute skill, download its tar.gz, and install it into my Claude skills folder (~/.claude/skills/).</code>
+            <button class="copy" data-copy="#cmdTell">Copy</button>
+          </div>
+        </div>
+
+        <div class="panel" id="t-code">
+          <p>Prefer to do it yourself? One line drops the skill into your personal skills folder:</p>
+          <div class="code">
+            <code id="cmdCode"><span class="ac">mkdir</span> -p ~/.claude/skills && <span class="ac">curl</span> -fsSL https://joetustin.com/skills/cobranded-card-bonus-dispute.tar.gz | <span class="ac">tar</span> -xz -C ~/.claude/skills/</code>
+            <button class="copy" data-copy="#cmdCode">Copy</button>
+          </div>
+        </div>
+
+        <div class="panel" id="t-ai">
+          <p>No terminal needed. Download the skill file, then upload it in <b>Settings &rarr; Capabilities &rarr; Skills</b> (paid plans):</p>
+          <div class="dl-row">
+            <a class="dl" href="cobranded-card-bonus-dispute.skill" download>&#8595;&nbsp; Download .skill</a>
+            <a class="dl ghost" href="https://support.claude.com" target="_blank" rel="noopener">Upload steps</a>
+          </div>
+        </div>
+
+        <div class="src">Read the source before you install &mdash; <a href="cobranded-card-bonus-dispute.tar.gz" download>cobranded-card-bonus-dispute.tar.gz</a> &middot; runs locally, refers to cards by last 4, stores nothing.</div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="sec" id="how">
+  <div class="wrap">
+    <div class="sec-kicker">Mechanics</div>
+    <div class="sec-title">How loading works</div>
+    <div class="steps">
+      <div class="step">
+        <div class="n">01 — Point</div>
+        <h4>Send Claude here</h4>
+        <p>Tell Claude to read the catalog at joetustin.com/skills/index.json — a plain list of every skill and where to fetch it.</p>
+      </div>
+      <div class="step">
+        <div class="n">02 — Find</div>
+        <h4>Match the skill</h4>
+        <p>Describe what you need — "the United/Chase bonus one" — and Claude picks the matching entry by its keywords.</p>
+      </div>
+      <div class="step">
+        <div class="n">03 — Install</div>
+        <h4>Drop it in</h4>
+        <p>Claude downloads the skill and unpacks it into your skills folder. Next time it's relevant, Claude just uses it.</p>
+      </div>
+    </div>
+    <p class="note">Self-install needs a Claude that can reach the web and your filesystem — <b>Claude Code or Cowork</b>. On Claude.ai, use the <b>Tell Claude</b> link to grab the file, then upload it under Settings. Exact menu paths shift as the app evolves; support.claude.com has the current steps.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div class="l"><a href="https://joetustin.com">joetustin.com</a></div>
+      <div class="r">
+        <a href="https://joetustin.com">Home</a>
+        <a href="#skills">Skills</a>
+        <a href="https://github.com/drbarq" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+    <p class="disclaim">These are self-advocacy and productivity tools, not legal or financial advice. The bonus-dispute skill doesn't manufacture outcomes — if the spend goal wasn't met or the offer had a genuine exclusion, it'll tell you. Always review anything it drafts before you send it.</p>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.copy').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var el=document.querySelector(btn.getAttribute('data-copy'));
+      var text=el?el.innerText:'';
+      navigator.clipboard.writeText(text).then(function(){
+        var old=btn.textContent;btn.textContent='Copied';btn.classList.add('done');
+        setTimeout(function(){btn.textContent=old;btn.classList.remove('done');},1600);
+      }).catch(function(){});
+    });
+  });
+  var tabs=document.querySelectorAll('.tab');
+  tabs.forEach(function(tab){
+    tab.addEventListener('click',function(){
+      tabs.forEach(function(t){t.setAttribute('aria-selected','false');});
+      tab.setAttribute('aria-selected','true');
+      document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active');});
+      var panel=document.getElementById(tab.getAttribute('data-tab'));
+      if(panel)panel.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

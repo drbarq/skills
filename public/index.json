@@ -1,0 +1,29 @@
+{
+  "$comment": "Skill catalog served at https://joetustin.com/skills/index.json. Point Claude here to discover and install skills. Each skill's download.tar_gz extracts to a folder named after the skill, ready to drop into ~/.claude/skills/ (Claude Code) or be uploaded via the .skill file (Claude.ai / Cowork).",
+  "catalog": "Skills",
+  "site": "https://joetustin.com/skills",
+  "version": "1.0.0",
+  "skills": [
+    {
+      "name": "cobranded-card-bonus-dispute",
+      "title": "Co-branded Card Bonus Dispute",
+      "summary": "Recover a co-branded airline or hotel credit card welcome bonus that didn't fully post — bonus miles, points, or status-qualifying points (United PQP, Delta MQD, etc.).",
+      "keywords": ["united", "chase", "quest", "pqp", "miles", "points", "delta", "amex", "mqd", "american", "citi", "southwest", "marriott", "hilton", "welcome bonus", "sign-up bonus", "missing miles", "dispute", "loyalty", "mileageplus", "skymiles"],
+      "version": "1.0.0",
+      "what_it_does": [
+        "Reconciles credit card statements against the loyalty activity export to pinpoint the missing bonus component.",
+        "Diagnoses the failure mode (duplicate account, status-points half dropped, partial post, wrong-account routing, posting window).",
+        "Corroborates the original offer, including via a Wayback Machine snapshot of the issuer's offer page.",
+        "Generates a dispute packet: timeline/reconciliation PDF, status document, secure-message drafts for the issuer and the loyalty program, phone scripts, and a follow-up tracker."
+      ],
+      "download": {
+        "tar_gz": "https://joetustin.com/skills/cobranded-card-bonus-dispute.tar.gz",
+        "skill_file": "https://joetustin.com/skills/cobranded-card-bonus-dispute.skill"
+      },
+      "install": {
+        "claude_code": "mkdir -p ~/.claude/skills && curl -fsSL https://joetustin.com/skills/cobranded-card-bonus-dispute.tar.gz | tar -xz -C ~/.claude/skills/",
+        "claude_ai_or_cowork": "Download cobranded-card-bonus-dispute.skill and upload it in Settings > Capabilities > Skills."
+      }
+    }
+  ]
+}
