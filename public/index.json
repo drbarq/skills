@@ -5,8 +5,8 @@
   "version": "1.0.0",
   "skills": [
     {
-      "name": "cobranded-card-bonus-dispute",
-      "title": "Co-branded Card Bonus Dispute",
+      "name": "signup-bonus-recovery",
+      "title": "Get the Miles You Signed Up For",
       "summary": "Recover a co-branded airline or hotel credit card welcome bonus that didn't fully post — bonus miles, points, or status-qualifying points (United PQP, Delta MQD, etc.).",
       "keywords": ["united", "chase", "quest", "pqp", "miles", "points", "delta", "amex", "mqd", "american", "citi", "southwest", "marriott", "hilton", "welcome bonus", "sign-up bonus", "missing miles", "dispute", "loyalty", "mileageplus", "skymiles"],
       "version": "1.0.0",
@@ -17,12 +17,12 @@
         "Generates a dispute packet: timeline/reconciliation PDF, status document, secure-message drafts for the issuer and the loyalty program, phone scripts, and a follow-up tracker."
       ],
       "download": {
-        "tar_gz": "https://joetustin.com/skills/cobranded-card-bonus-dispute.tar.gz",
-        "skill_file": "https://joetustin.com/skills/cobranded-card-bonus-dispute.skill"
+        "tar_gz": "https://joetustin.com/skills/signup-bonus-recovery.tar.gz",
+        "skill_file": "https://joetustin.com/skills/signup-bonus-recovery.skill"
       },
       "install": {
-        "claude_code": "mkdir -p ~/.claude/skills && curl -fsSL https://joetustin.com/skills/cobranded-card-bonus-dispute.tar.gz | tar -xz -C ~/.claude/skills/",
-        "claude_ai_or_cowork": "Download cobranded-card-bonus-dispute.skill and upload it in Settings > Capabilities > Skills."
+        "claude_code": "mkdir -p ~/.claude/skills && curl -fsSL https://joetustin.com/skills/signup-bonus-recovery.tar.gz | tar -xz -C ~/.claude/skills/",
+        "claude_ai_or_cowork": "Download signup-bonus-recovery.skill and upload it in Settings > Capabilities > Skills."
       }
     }
   ]

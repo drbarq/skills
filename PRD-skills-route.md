@@ -13,7 +13,7 @@ and makes them installable in one step. The headline interaction: a visitor (oft
 a LinkedIn post) tells Claude *"go to joetustin.com/skills, find the United skill, and load it,"*
 and Claude reads the catalog, downloads the right skill, and installs it.
 
-Ship the first skill, `cobranded-card-bonus-dispute`, and build the section so adding more skills
+Ship the first skill, `signup-bonus-recovery`, and build the section so adding more skills
 later is trivial.
 
 ## 2. Why it's shaped this way
@@ -39,12 +39,12 @@ rather than rebuilding from scratch:
 
 ```
 Skills/
-├── src/cobranded-card-bonus-dispute/     # the skill source (SKILL.md + references/ + scripts/)
+├── src/signup-bonus-recovery/     # the skill source (SKILL.md + references/ + scripts/)
 ├── public/
 │   ├── index.html                        # styled standalone landing page (port into a route)
 │   ├── index.json                        # the catalog  → serve at /skills/index.json
-│   ├── cobranded-card-bonus-dispute.tar.gz   # Claude Code install artifact
-│   └── cobranded-card-bonus-dispute.skill    # Claude.ai / Cowork upload artifact
+│   ├── signup-bonus-recovery.tar.gz   # Claude Code install artifact
+│   └── signup-bonus-recovery.skill    # Claude.ai / Cowork upload artifact
 ├── build.sh                              # regenerates the two artifacts from src/
 └── README.md
 ```
@@ -77,13 +77,13 @@ Update flow: edit `src/` in the skill repo → run `./build.sh` → copy the ref
 2. **Catalog endpoint:** `GET https://joetustin.com/skills/index.json` returns the JSON in
    `public/index.json` with `Content-Type: application/json`. This is the contract Claude reads
    to discover and install skills — its URLs and `keywords` must be intact.
-3. **Download endpoints:** `GET https://joetustin.com/skills/cobranded-card-bonus-dispute.tar.gz`
-   and `…/cobranded-card-bonus-dispute.skill` return the files as **downloads** (binary, correct
+3. **Download endpoints:** `GET https://joetustin.com/skills/signup-bonus-recovery.tar.gz`
+   and `…/signup-bonus-recovery.skill` return the files as **downloads** (binary, correct
    content-type, `Content-Disposition: attachment` preferred). They must **not** be rewritten,
    transformed, or 404'd by the framework router or a trailing-slash rule.
 4. **Self-install flow works end to end:** from a Claude Code / Cowork session, the catalog is
    fetchable and the `.tar.gz` downloads and extracts to a folder named
-   `cobranded-card-bonus-dispute/` (so it lands cleanly in `~/.claude/skills/`).
+   `signup-bonus-recovery/` (so it lands cleanly in `~/.claude/skills/`).
 5. **Extensible:** adding skill #2 = drop a `src/<name>/`, run `build.sh`, add a catalog entry
    and a page entry. No structural changes.
 
@@ -106,8 +106,8 @@ The site appears to be **Next.js (App Router)** — adapt if the repo shows othe
 before implementing.
 
 **If Next.js (App Router):**
-- Static assets → `public/skills/index.json`, `public/skills/cobranded-card-bonus-dispute.tar.gz`,
-  `public/skills/cobranded-card-bonus-dispute.skill`. Files in `public/` are served verbatim at
+- Static assets → `public/skills/index.json`, `public/skills/signup-bonus-recovery.tar.gz`,
+  `public/skills/signup-bonus-recovery.skill`. Files in `public/` are served verbatim at
   the matching path, which gives the required `joetustin.com/skills/...` URLs. Confirm no
   `next.config` rewrite/redirect or middleware intercepts `/skills/*` static files.
 - Page → `app/skills/page.tsx` (server component is fine; the copy buttons + tabs need a small
@@ -124,9 +124,9 @@ and render the page from `index.html`/a template.
 
 1. Inspect the repo; identify the framework, the static/public dir, and the site's design tokens
    and layout components.
-2. Create the public skill repo (or confirm it exists) and push `src/cobranded-card-bonus-dispute/`
+2. Create the public skill repo (or confirm it exists) and push `src/signup-bonus-recovery/`
    + `build.sh` + a README. (Joe may do this manually — coordinate.)
-3. Copy `index.json`, `cobranded-card-bonus-dispute.tar.gz`, and `cobranded-card-bonus-dispute.skill`
+3. Copy `index.json`, `signup-bonus-recovery.tar.gz`, and `signup-bonus-recovery.skill`
    into the site's static dir under a `skills/` subfolder.
 4. Build the `/skills` page route from `public/index.html`'s structure + copy, restyled to the
    site's design system, reusing the site header/footer.
@@ -138,12 +138,12 @@ and render the page from `index.html`/a template.
 ## 9. Acceptance criteria
 
 - [ ] `curl -sI https://joetustin.com/skills/index.json` → `200`, `content-type: application/json`.
-- [ ] `curl -sI https://joetustin.com/skills/cobranded-card-bonus-dispute.tar.gz` → `200`,
+- [ ] `curl -sI https://joetustin.com/skills/signup-bonus-recovery.tar.gz` → `200`,
       downloadable (octet-stream/gzip), not HTML.
-- [ ] `curl -sI https://joetustin.com/skills/cobranded-card-bonus-dispute.skill` → `200`,
+- [ ] `curl -sI https://joetustin.com/skills/signup-bonus-recovery.skill` → `200`,
       downloadable.
-- [ ] `curl -s https://joetustin.com/skills/cobranded-card-bonus-dispute.tar.gz | tar -tz | head`
-      lists `cobranded-card-bonus-dispute/SKILL.md`.
+- [ ] `curl -s https://joetustin.com/skills/signup-bonus-recovery.tar.gz | tar -tz | head`
+      lists `signup-bonus-recovery/SKILL.md`.
 - [ ] In a Claude Code / Cowork session: *"go to joetustin.com/skills, find the United/Chase
       bonus-dispute skill, and install it"* results in the skill installed under `~/.claude/skills/`.
 - [ ] `/skills` renders with the site's header/footer/fonts; responsive on mobile; keyboard focus

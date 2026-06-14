@@ -11,7 +11,7 @@ commands, just a URL.
 ```
 skills/
 ├── src/                         # edit skills here (each is a folder with SKILL.md at its root)
-│   └── cobranded-card-bonus-dispute/
+│   └── signup-bonus-recovery/
 │       ├── SKILL.md
 │       ├── references/
 │       └── scripts/
@@ -46,7 +46,7 @@ Verify after deploy:
 
 ```bash
 curl -sI https://joetustin.com/skills/index.json                            # 200, application/json
-curl -sI https://joetustin.com/skills/cobranded-card-bonus-dispute.tar.gz   # 200, downloadable
+curl -sI https://joetustin.com/skills/signup-bonus-recovery.tar.gz   # 200, downloadable
 ```
 
 ## How a user installs (what the page tells them)
@@ -60,7 +60,7 @@ curl -sI https://joetustin.com/skills/cobranded-card-bonus-dispute.tar.gz   # 20
 
 Skills published here are meant to run locally and hold **no personal data**. Before shipping a
 skill, scrub example data of real names, account numbers, card numbers, and member IDs — the
-`cobranded-card-bonus-dispute` example uses a fictional persona and placeholder numbers for this
+`signup-bonus-recovery` example uses a fictional persona and placeholder numbers for this
 reason. Never commit a real user's case file.
 
 ## Adding the next skill

@@ -1,5 +1,5 @@
 ---
-name: cobranded-card-bonus-dispute
+name: signup-bonus-recovery
 description: >-
   Diagnose and resolve a co-branded airline or hotel credit card welcome-bonus dispute end to
   end — when bonus miles, points, or status-qualifying points (United PQP, Delta MQD, etc.)
